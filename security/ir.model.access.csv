@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+casas,casas_default,model_casas,,1,0,0,0
+casas_permisos,casas_permisos_default,model_casas,modulo_casas.administradores,1,1,1,1
+
+categorias,categorias_default,model_categorias,,1,0,0,0
+categorias_permisos,categorias_permisos_librarian,model_categorias,modulo_casas.administradores,1,1,1,1
+
+clientes,clientes_default,model_clientes,,1,0,0,0
+clientes_permisos,clientes_permisos_librarian,model_clientes,modulo_casas.administradores,1,1,1,1
+
+pisos,pisos_default,model_pisos,,1,0,0,0
+pisos_permisos,pisos_permisos_librarian,model_pisos,modulo_casas.administradores,1,1,1,1

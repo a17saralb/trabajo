@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='pisos_action' model='ir.actions.act_window'>
+        <field name="name">pisos</field>
+        <field name="res_model">pisos</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Alquiler y venta de viviendas" id="base_menu" />
+    <menuitem name="Pisos" id="pisos_menu" parent="base_menu" action="pisos_action"/>
+
+    <!-- Form View -->
+    <record id="pisos_view_form" model="ir.ui.view">
+        <field name="name">Gestion de pisos</field>
+        <field name="model">pisos</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="alquilado"  string="Alquilar piso" type="object"/>
+                    <button name="disponible"  string="Disponible" type="object"/>
+                    <button name="vendido"  string="Vender piso" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="cod"/>
+                        <field name="name"/>
+                        <field name="parking"/>
+                        <field name="lift"/>
+
+                    </group>
+
+                    <group>
+                        <field name="date_rent"/>
+                        <field name="numMeses"/>
+                        <field name="pricePmonth"/>
+                        <field name="totalPrice"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="pisos_view_tree" model="ir.ui.view">
+        <field name="name">Gestion de pisos</field>
+        <field name="model">pisos</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="cod"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+</odoo>

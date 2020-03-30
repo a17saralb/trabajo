@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='casas_action' model='ir.actions.act_window'>
+        <field name="name">casas</field>
+        <field name="res_model">casas</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Alquiler y venta de viviendas" id="base_menu" />
+    <menuitem name="Casas" id="casas_menu" parent="base_menu" action="casas_action"/>
+
+    <!-- Form View -->
+    <record id="casas_view_form" model="ir.ui.view">
+        <field name="name">Gestion de casas</field>
+        <field name="model">casas</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="alquilada"  string="Alquilar casa" type="object"/>
+                    <button name="disponible"  string="Disponible" type="object"/>
+                    <button name="vendida"  string="Vender casa" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="cod"/>
+                        <field name="name"/>
+
+                        
+                    </group>
+
+                    <group>
+                        <field name="date_rent"/>
+                        <field name="numMeses"/>
+                        <field name="pricePmonth"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="casas_view_tree" model="ir.ui.view">
+        <field name="name">Gestion de casas</field>
+        <field name="model">casas</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="cod"/>
+            </tree>
+        </field>
+    </record>
+
+  
+
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='clientes_action' model='ir.actions.act_window'>
+        <field name="name">clientes</field>
+        <field name="res_model">clientes</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Gestión de viviendas" id="base_menu" />
+    <menuitem name="Clientes" id="clientes_menu" parent="base_menu" action="clientes_action"/>
+
+    <!-- Form View -->
+    <record id="clientes_view_form" model="ir.ui.view">
+        <field name="name">Clientes</field>
+        <field name="model">clientes</field>
+        <field name="arch" type="xml">
+            <form>
+                <!--<header>
+                    <button name="alquilada"  string="Casa Alquilada" type="object"/>
+                    <button name="vendida"  string="Casa comprada" type="object"/>
+                </header>-->
+                <group>
+                    <group>
+                        <field name="dni"/>
+                        <field name="name"/>
+                        <field name="address"/>
+                        <field name="tlf"/>
+
+
+                    </group>
+                    <group>
+                        <field name="casas" widget="many2many_tags"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="cliente_view_tree" model="ir.ui.view">
+        <field name="name">Clientes</field>
+        <field name="model">clientes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="dni"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+</odoo>
