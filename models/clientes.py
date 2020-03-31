@@ -14,8 +14,8 @@ class Clientes(models.Model):
     name = fields.Char('Nombre', required=True)
     address = fields.Char('Direccion')
     tlf = fields.Char('Telefono')
-    #pisos = fields.Many2many('pisos', string='Pisos en posesión')
-    #locales = fields.Many2many('locales', string='Locales en posesión')
+    pisos = fields.Many2many('pisos', string='Pisos en posesión')
+
 
     @api.model
     def get_casas(self, casas):
