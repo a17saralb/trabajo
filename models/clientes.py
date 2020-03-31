@@ -5,17 +5,19 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
+
 class Clientes(models.Model):
     _name = 'clientes'
     _description = 'Clientes'
+    #_inherits = {'res.partner': 'partner_id'}
 
+    #partner_id = fields.Many2one('res.partner', ondelete='cascade')
     casas = fields.Many2many('casas', string='Casas en posesión')
     dni = fields.Char('Dni', required=True)
     name = fields.Char('Nombre', required=True)
     address = fields.Char('Direccion')
     tlf = fields.Char('Telefono')
     pisos = fields.Many2many('pisos', string='Pisos en posesión')
-
 
     @api.model
     def get_casas(self, casas):
