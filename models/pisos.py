@@ -40,7 +40,7 @@ class Pisos(models.Model):
     #validacion estado
     @api.model
     def is_allowed_transition(self, old_state, new_state):
-        allowed = [('disponible', 'vendida'),
+        allowed = [('disponible', 'vendido'),
                    ('disponible', 'alquilado'),
                    ('alquilado', 'disponible'),
                    ('alquilado', 'vendido')]
@@ -65,8 +65,11 @@ class Pisos(models.Model):
     def vendido(self):
         self.change_state('vendido')
 
-    @api.constrains('date_start', 'date_end')
-    def _check_date(self):
+    _sql_constraints = [('piso_uniq', 'UNIQUE (cod)', 'Ya hay un piso con ese codigo')]
+
+    @api.constrains('date_rent')
+
+    def _check_release_date(self):
         for record in self:
-            if record.date_start > record.date_end:
-                raise models.ValidationError('Start date Afer end date!')
+            if  record.date_rent < fields.Date.today():
+                raise models.ValidationError('La fecha de alquiler o venta no puede ser en el pasado')

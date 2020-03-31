@@ -62,3 +62,10 @@ class Casas(models.Model):
     def vendida(self):
         self.change_state('vendida')
 
+    sql_constraints = [('casa_uniq', 'UNIQUE (cod)', 'Ya hay una casa con ese código')]
+
+    @api.constrains('date_rent')
+    def _check_release_date(self):
+        for record in self:
+            if record.date_rent < fields.Date.today():
+                raise models.ValidationError('La fecha de alquiler o venta no puede ser en el pasado')

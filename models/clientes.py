@@ -21,3 +21,5 @@ class Clientes(models.Model):
     def get_casas(self, casas):
         return casas.mapped('casas.cod')
 
+    sql_constraints = [('cliente_uniq', 'UNIQUE (dni)', 'Ya hay un cliente con ese dni')]
+

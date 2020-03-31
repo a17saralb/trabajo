@@ -27,7 +27,7 @@
                     <group>
                         <field name="cod"/>
                         <field name="name"/>
-
+                        <field name="category_id"/>
                         
                     </group>
 
