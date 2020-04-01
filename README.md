@@ -7,40 +7,71 @@ Consta de cuatro modelos: casas, pisos, clientes y categorías.
 
 ## Modelo categeorias.
 
-En este modelo se utiliza para añadir distintas categorías a las que pueden pertenecer los 
+En este modelo se utiliza para añadir distintas categorías a las que pueden pertenecer cada una de las viviendas almacenadas. Lo que se pretende no es definir tipos genéricos como casas, pisos... Que es lo que ya reflejan las clases; sino crear agrupaciones personalizadas como podría ser: vivienda familiar, estudio personal...
 
 
-Los cursos se pueden ver listados(con la vista tree) o agrupados por nivel(con la vista kanban)
+## Modelo casas.
 
----El modelo courses.student que maneja la gestión de los alumnos se utiliza de una forma un poco 
----diferente a los cursos, puesto que tiene herencia por delegación del modelo "res.partner". Los 
----datos que podemos manejar son los siguientes:
+En este modelo se pretende gestionar cada una de las casas que pueden ser alquiladas o vendidas, es decir, las que se encuentran disponibles, gestionar su cambio de estado y almacenar sus datos. Cada casa añadida puede tener distintos campos:
 
----partner_id: Cuando queremos crear un estudiante nos muestra una lista con los nombres que ya 
----están declarados en el modelo padre.
+- _name:
+- _descricion:
+- cod: es la clave primaria de cada casa, aquel código único para ella por el que se define de las demás. Este campo es obligatorio.
+- address: este campo se utiliza para indicar la dirección de la casa. Este campo es obligatorio.
+- date_rent: fecha en la que comienza el alquiler o en la que se vende el inmueble.
+- numMeses: número total de meses por los que va estar alquilada.
+- category_id: identificador de la categoría.
+- pricePMonth: indica el precio del alquiler o de la venta por mes.
+- totalPrice: aquí nos encontramos con un campo calculado que se corresponde con el precio total 
+que va a costar el alquiler o venta. Este campo se calcula en el método _total, que realizando la multiplicación entre el número de meses y el precio por cada uno de ellos obtiene el precio total.
+- state: en esta lista de selección se almacenan los distintos estados por los que puede pasar una casa, alquilada --> si se encuentra alquilada a un cliente, vendida --> si la vivienda se vende o disponible --> quiere decir que la casa se puede alquilar o comprar ya que no se encuentra en ninguno de esos estados.
+A continuación en este modelo se definen las restricciones y validaciones en el cambio de estado de la vivienda, es decir, se definen los cambios posibles; en este caso una casa que está disponible puede alquilarse o venderse en cualquier momento, si la casa está alquilada puede terminar el período de alquiler por lo que pasará a estar disponible otra vez, o puede venderse. En el caso de que la casa se encuentre vendida, no podrá volver a estar disponible ni se podrá alquilar.
+Para constar de los cambios de estado se declaran unas funciones de mismo nombre que el estado para establecerlo.
+Por último consta de dos restricciones:
+- la primera de ellas comprueba que al guardar una casa en la base de datos no exista otra con la misma clave primaria, que sea única, es decir, que no puede crearse dos casas que tengan el mismo código.
+- la segunda es una restricción en la fecha. Comprueba que la fecha introducida para el comienzo del alquiler o de la venta no sea anterior a la fecha del día en el que se realiza el registro.
+
+Este modelo cuenta con las vistas tree y form.
 
 
-Para este modelo únicamente tenemos las vistas tree y form.
+## Modelo pisos.
+Es similar al modelo de casas, este almacena cada uno de los pisos que pueden ser alquilados o vendidos, es decir, los que se encuentran disponibles, gestionar su cambio de estado y almacenar sus datos. Cada piso añadido puede tener distintos campos:
+- en primer lugar tienen los mismos campos que casas:
+- _name:
+- _descricion:
+- cod: es la clave primaria de cada casa, aquel código único para ella por el que se define de las demás. Este campo es obligatorio.
+- address: este campo se utiliza para indicar la dirección de la casa. Este campo es obligatorio.
+- date_rent: fecha en la que comienza el alquiler o en la que se vende el inmueble.
+- numMeses: número total de meses por los que va estar alquilada.
+- category_id: identificador de la categoría.
+- pricePMonth: indica el precio del alquiler o de la venta por mes.
+- totalPrice: aquí nos encontramos con un campo calculado que se corresponde con el precio total 
+que va a costar el alquiler o venta. Este campo se calcula en el método _total, que realizando la multiplicación entre el número de meses y el precio por cada uno de ellos obtiene el precio total.
+- state: en esta lista de selección se almacenan los distintos estados por los que puede pasar una casa, alquilada --> si se encuentra alquilada a un cliente, vendida --> si la vivienda se vende o disponible --> quiere decir que la casa se puede alquilar o comprar ya que no se encuentra en ninguno de esos estados.
+- A diferencia de casas cuenta con dos boolean, parking y garaje en el que se le puede indicar si cuentan con estas características.
+
+Este modelo cuenta con las vistas tree y form.
+
+## Modelo Cliente
+En este modelo se definen los datos de cada uno de los clientes, pueden ser definidos antes de alquilar o comprar una vivienda pero que tengán preintención de ello, sino sería irrelevante guardarlos. Cada Cliente puede tener diferentes campos:
+- _name:
+- _description:
+- casas: es un campo relacional que relaciona cada cliente con el número de casas que posee.
+- dni: es el campo por el que se identifica a cada cliente ya que es único. Es obligatorio.
+- name: define el nombre y apellidos. Es obligatorio.
+- address: aquí se almacena la dirección de cada cliente.
+- tlf: para guardar el teléfono de cada cliente.
+- pisos: es un campo relacional que relaciona cada cliente con los pisos que tiene en posesión.
+
+Este modelo tiene una restricción sql que comprueba que no existan clientes con el mismo dni.
+
+Este modelo cuenta con las vistas tree y form.
 
 
 
-Para que la fecha en la que termina la impartición no sea anterior a la de comienzo, pues no tendría sentido.
+**Este módulo está creado para la versión 12 de Odoo.**
 
-Para que un estudiante únicamente pueda estar asignado a un solo curso que se esté impartiendo en ese momento. Si el curso al que estaba asignado ya ha terminado, podrá ser asignado a otro distinto.
-
-Para este modelo además de las vistas tree y form tenemos la vista calendar.
-
-Para cada modelo hay un elemento en el menú superior del módulo, mediante los cuales podremos acceder a sus vistas para gestionar cada uno de ellos. Podremos crear cursos y alumnos independientemente, o hacerlo a la vez que creamos también una impartición.
-
-Este módulo está creado para la versión 12 de Odoo.
+**El enlace: https://github.com/a17saralb/trabajo**
 
 
-class FruteriaSocio(models.Model):
-    _name = 'fruteria.socio'
-    _description = 'Socio fruteria'
-    _inherits = {'res.partner': 'partner_id'}
 
-    imagen_socio = fields.Binary('Imagen', related='partner_id.image')
-    id_socio = fields.Integer('Id_Socio',require=True)
-    partner_id = fields.Many2one('res.partner',ondelete='cascade',require=True)
-    ids_peticion = fields.One2many('fruteria.peticion',inverse_name='id_socio')

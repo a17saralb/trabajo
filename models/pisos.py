@@ -13,7 +13,7 @@ class Pisos(models.Model):
     _description = 'pisos'
 
     cod = fields.Char('Codigo', required=True)
-    name = fields.Char('Direccion', required=True)
+    address = fields.Char('Direccion', required=True)
     date_rent = fields.Date('Fecha de alquiler', default=lambda*a:datetime.now().strftime('%Y-%m-%d'))
     numMeses = fields.Integer('Periodo de tiempo')
     category_id = fields.Many2one('categorias', string='Categoria')
@@ -68,7 +68,6 @@ class Pisos(models.Model):
     _sql_constraints = [('piso_uniq', 'UNIQUE (cod)', 'Ya hay un piso con ese codigo')]
 
     @api.constrains('date_rent')
-
     def _check_release_date(self):
         for record in self:
             if  record.date_rent < fields.Date.today():

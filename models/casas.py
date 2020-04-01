@@ -56,6 +56,7 @@ class Casas(models.Model):
     def disponible(self):
         self.change_state('disponible')
 
+
     def alquilada(self):
         self.change_state('alquilada')
 

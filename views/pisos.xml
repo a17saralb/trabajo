@@ -26,7 +26,7 @@
                 <group>
                     <group>
                         <field name="cod"/>
-                        <field name="name"/>
+                        <field name="address"/>
                         <field name="category_id"/>
                         <field name="parking"/>
                         <field name="lift"/>
@@ -50,8 +50,8 @@
         <field name="model">pisos</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
                 <field name="cod"/>
+                <field name="address"/>
             </tree>
         </field>
     </record>
