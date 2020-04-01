@@ -2,7 +2,7 @@
 <odoo>
 
     <record id='casas_action' model='ir.actions.act_window'>
-        <field name="name">casas</field>
+        <field name="name">Casas</field>
         <field name="res_model">casas</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
@@ -35,6 +35,7 @@
                         <field name="date_rent"/>
                         <field name="numMeses"/>
                         <field name="pricePmonth"/>
+                        <field name="totalPrice"/>
                     </group>
                 </group>
             </form>

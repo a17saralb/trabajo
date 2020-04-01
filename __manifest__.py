@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Alquiler de casas",  # Module title
-    'summary': "Gestión de alquiler de casas",  # Module subtitle phrase
-    'description': """Aplicación de gestión de alquiler de una o varias casas a un cliente""",  # You can also rst format
+    'name': "Alquiler de viviendas",  # Module title
+    'summary': "Gestión de alquiler de viviendas",  # Module subtitle phrase
+    'description': """Aplicación de gestión de alquiler de una o varias viviendas a un cliente""",  # You can also rst format
     'author': "Sara M. Lago Bouzas",
     'website': "http://www.fotocasa.com",
     'category': 'Servicios',

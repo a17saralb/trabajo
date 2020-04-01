@@ -11,6 +11,9 @@ from odoo.tools.translate import _
 class Pisos(models.Model):
     _name = 'pisos'
     _description = 'pisos'
+    #_inherits = {'res.partner': 'partner_id'}
+
+    #partner_id = fields.Many2one('res.partner', ondelete='cascade')
 
     cod = fields.Char('Codigo', required=True)
     address = fields.Char('Direccion', required=True)
@@ -72,3 +75,14 @@ class Pisos(models.Model):
         for record in self:
             if  record.date_rent < fields.Date.today():
                 raise models.ValidationError('La fecha de alquiler o venta no puede ser en el pasado')
+
+
+class pisosMember(models.Model):
+    _name = 'pisos.member'
+    _inherits = {'res.partner': 'partner_id'}
+
+    partner_id = fields.Many2one('res.partner', ondelete='cascade')
+    date_start = fields.Date('Member Since')
+    date_end = fields.Date('Termination Date')
+    member_number = fields.Char()
+    date_of_birth = fields.Date('Date of birth')

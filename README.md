@@ -14,8 +14,8 @@ En este modelo se utiliza para añadir distintas categorías a las que pueden pe
 
 En este modelo se pretende gestionar cada una de las casas que pueden ser alquiladas o vendidas, es decir, las que se encuentran disponibles, gestionar su cambio de estado y almacenar sus datos. Cada casa añadida puede tener distintos campos:
 
-- _name:
-- _descricion:
+- _name: identifica al identificador global interno del modelo.
+- _descricion: es un nombre más descriptivo del modelo.
 - cod: es la clave primaria de cada casa, aquel código único para ella por el que se define de las demás. Este campo es obligatorio.
 - address: este campo se utiliza para indicar la dirección de la casa. Este campo es obligatorio.
 - date_rent: fecha en la que comienza el alquiler o en la que se vende el inmueble.
@@ -37,8 +37,8 @@ Este modelo cuenta con las vistas tree y form.
 ## Modelo pisos.
 Es similar al modelo de casas, este almacena cada uno de los pisos que pueden ser alquilados o vendidos, es decir, los que se encuentran disponibles, gestionar su cambio de estado y almacenar sus datos. Cada piso añadido puede tener distintos campos:
 - en primer lugar tienen los mismos campos que casas:
-- _name:
-- _descricion:
+- _name: identifica al identificador global interno del modelo.
+- _descricion: es un nombre más descriptivo del modelo.
 - cod: es la clave primaria de cada casa, aquel código único para ella por el que se define de las demás. Este campo es obligatorio.
 - address: este campo se utiliza para indicar la dirección de la casa. Este campo es obligatorio.
 - date_rent: fecha en la que comienza el alquiler o en la que se vende el inmueble.
@@ -54,8 +54,8 @@ Este modelo cuenta con las vistas tree y form.
 
 ## Modelo Cliente
 En este modelo se definen los datos de cada uno de los clientes, pueden ser definidos antes de alquilar o comprar una vivienda pero que tengán preintención de ello, sino sería irrelevante guardarlos. Cada Cliente puede tener diferentes campos:
-- _name:
-- _description:
+- _name: identifica al identificador global interno del modelo.
+- _descricion: es un nombre más descriptivo del modelo.
 - casas: es un campo relacional que relaciona cada cliente con el número de casas que posee.
 - dni: es el campo por el que se identifica a cada cliente ya que es único. Es obligatorio.
 - name: define el nombre y apellidos. Es obligatorio.
