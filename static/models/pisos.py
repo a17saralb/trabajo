@@ -21,6 +21,7 @@ class Pisos(models.Model):
     lift = fields.Boolean("Ascensor")
 
 
+    #pone res.users
     pricePmonth = fields.Float('Precio por mes')
     totalPrice = fields.Float('Precio total', compute='_total')
 

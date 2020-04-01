@@ -27,5 +27,3 @@ class Clientes(models.Model):
     def get_casas(self, casas):
         return casas.mapped('casas.cod')
 
-
-

@@ -50,20 +50,18 @@ que va a costar el alquiler o venta. Este campo se calcula en el método _total,
 - state: en esta lista de selección se almacenan los distintos estados por los que puede pasar una casa, alquilada --> si se encuentra alquilada a un cliente, vendida --> si la vivienda se vende o disponible --> quiere decir que la casa se puede alquilar o comprar ya que no se encuentra en ninguno de esos estados.
 - A diferencia de casas cuenta con dos boolean, parking y garaje en el que se le puede indicar si cuentan con estas características.
 
-Este modelo cuenta con las vistas tree y form.
+Este modelo cuenta con las vistas tree, form y kanban.
 
 ## Modelo Cliente
+
+Este modelo tiene herencia por delegación del modelo res.partner
 En este modelo se definen los datos de cada uno de los clientes, pueden ser definidos antes de alquilar o comprar una vivienda pero que tengán preintención de ello, sino sería irrelevante guardarlos. Cada Cliente puede tener diferentes campos:
 - _name: identifica al identificador global interno del modelo.
 - _descricion: es un nombre más descriptivo del modelo.
 - casas: es un campo relacional que relaciona cada cliente con el número de casas que posee.
-- dni: es el campo por el que se identifica a cada cliente ya que es único. Es obligatorio.
-- name: define el nombre y apellidos. Es obligatorio.
-- address: aquí se almacena la dirección de cada cliente.
-- tlf: para guardar el teléfono de cada cliente.
+- a los siguientes campos accede a través del modelo res.partner: dni, street, city, state_id (se refiere a la provincia), zip ( se refiere al código postal), countryid, tlf e image.
 - pisos: es un campo relacional que relaciona cada cliente con los pisos que tiene en posesión.
 
-Este modelo tiene una restricción sql que comprueba que no existan clientes con el mismo dni.
 
 Este modelo cuenta con las vistas tree y form.
 

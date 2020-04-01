@@ -17,23 +17,24 @@
         <field name="model">clientes</field>
         <field name="arch" type="xml">
             <form>
-                <!--<header>
-                    <button name="alquilada"  string="Casa Alquilada" type="object"/>
-                    <button name="vendida"  string="Casa comprada" type="object"/>
-                </header>-->
                 <group>
                     <group>
+                        <field name="partner_id"/>
                         <field name="dni"/>
-                        <field name="name"/>
-                        <field name="address"/>
                         <field name="tlf"/>
-
-
+                        <field name="street"/>
+                        <field name="city"/>
+                        <field name="state_id"/>
+                        <field name="zip"/>
+                        <field name="country_id"/>
                     </group>
                     <group>
-                        <field name="casas" widget="many2many_tags"/>
-                        <field name="pisos" widget="many2many_tags"/>
+                        <field name="image" widget="image" class="oe_avatar"/>
                     </group>
+                </group>
+                <group>
+                    <field name="casas" widget="many2many_tags"/>
+                    <field name="pisos" widget="many2many_tags"/>
                 </group>
             </form>
         </field>
@@ -46,6 +47,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="dni"/>
+                <field name="partner_id"/>
             </tree>
         </field>
     </record>

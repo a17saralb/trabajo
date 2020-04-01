@@ -7,7 +7,7 @@ class Categorias(models.Model):
     _name = 'categorias'
 
     _parent_store = True
-    _parent_name = "parent_id" 
+    _parent_name = "parent_id"  # optional if field is 'parent_id'
 
     name = fields.Char('Categoria')
     description = fields.Text('Description')

@@ -1,33 +1,32 @@
 # -*- coding: utf-8 -*-
 import logging
-from datetime import datetime, timedelta, date
+from datetime import datetime
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
 
+logger = logging.getLogger(__name__)
 
-class Pisos(models.Model):
-    _name = 'pisos'
-    _description = 'pisos'
+
+class Casas(models.Model):
+    _name = 'casas'
+    _description = 'Casas'
 
     cod = fields.Char('Codigo', required=True)
-    address = fields.Char('Direccion', required=True)
+    name = fields.Char('Direccion', required=True)
     date_rent = fields.Date('Fecha de alquiler', default=lambda*a:datetime.now().strftime('%Y-%m-%d'))
     numMeses = fields.Integer('Periodo de tiempo')
     category_id = fields.Many2one('categorias', string='Categoria')
-    parking = fields.Boolean("Garaje")
-    lift = fields.Boolean("Ascensor")
 
 
     pricePmonth = fields.Float('Precio por mes')
     totalPrice = fields.Float('Precio total', compute='_total')
-
     state = fields.Selection([
-        ('alquilado', 'Alquilado'),
+        ('alquilada', 'Alquilada'),
         ('disponible', 'Disponible'),
-        ('vendido', 'Vendido')],
+        ('vendida', 'Vendida')],
         'State', default="disponible")
 
     @api.one
@@ -35,39 +34,39 @@ class Pisos(models.Model):
     def _total(self):
         self.totalPrice = self.numMeses * self.pricePmonth
 
-
     #validacion estado
     @api.model
     def is_allowed_transition(self, old_state, new_state):
-        allowed = [('disponible', 'vendido'),
-                   ('disponible', 'alquilado'),
-                   ('alquilado', 'disponible'),
-                   ('alquilado', 'vendido')]
+        allowed = [('disponible', 'vendida'),
+                   ('disponible', 'alquilada'),
+                   ('alquilada', 'disponible'),
+                   ('alquilada', 'vendida')]
         return (old_state, new_state) in allowed
 
     @api.multi
     def change_state(self, new_state):
-        for piso in self:
-            if piso.is_allowed_transition(piso.state, new_state):
-                piso.state = new_state
+        for casa in self:
+            if casa.is_allowed_transition(casa.state, new_state):
+                casa.state = new_state
             else:
-                message = _('Cambiar de %s a %s no está permitido') % (piso.state, new_state)
+                message = _('Cambiar de %s a %s no está permitido') % (casa.state, new_state)
                 raise UserError(message)
 
     #cambio estado
     def disponible(self):
         self.change_state('disponible')
 
-    def alquilado(self):
-        self.change_state('alquilado')
 
-    def vendido(self):
-        self.change_state('vendido')
+    def alquilada(self):
+        self.change_state('alquilada')
 
-    _sql_constraints = [('piso_uniq', 'UNIQUE (cod)', 'Ya hay un piso con ese codigo')]
+    def vendida(self):
+        self.change_state('vendida')
+
+    sql_constraints = [('casa_uniq', 'UNIQUE (cod)', 'Ya hay una casa con ese código')]
 
     @api.constrains('date_rent')
     def _check_release_date(self):
         for record in self:
-            if  record.date_rent < fields.Date.today():
+            if record.date_rent < fields.Date.today():
                 raise models.ValidationError('La fecha de alquiler o venta no puede ser en el pasado')

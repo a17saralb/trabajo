@@ -63,6 +63,7 @@ class Casas(models.Model):
     def vendida(self):
         self.change_state('vendida')
 
+    #validación cod único y fecha de alquiler
     sql_constraints = [('casa_uniq', 'UNIQUE (cod)', 'Ya hay una casa con ese código')]
 
     @api.constrains('date_rent')
